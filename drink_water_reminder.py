@@ -1,16 +1,14 @@
-import tkinter as tk
-import time
 import schedule
-from datetime import datetime
-
-def show_reminder():
-    # 创建弹窗
-    root = tk.Tk()
-    root.withdraw()  # 不显示主窗口
-    tk.messagebox.showinfo("喝水提醒", "喝水时间到了！")
+import time
+from plyer import notification  # 用于跨平台通知
 
 def job():
-    show_reminder()
+    # 发送系统通知
+    notification.notify(
+        title="喝水提醒",  # 通知标题
+        message="该喝水啦！保持水分摄入，有益健康哦~",  # 通知内容
+        timeout=10  # 通知显示时间（秒）
+    )
 
 def main():
     start_hour = 9
@@ -18,7 +16,7 @@ def main():
 
     # 安排每天在9:45, 10:45, ..., 21:45执行提醒
     for hour in range(start_hour, end_hour + 1):
-        schedule.every().day.at(f"{hour:02d}:05").do(job)
+        schedule.every().day.at(f"{hour:02d}:58").do(job)  # 改为每小时的45分提醒
 
     while True:
         # 执行所有到期的任务
@@ -26,5 +24,4 @@ def main():
         time.sleep(1)
 
 if __name__ == "__main__":
-    import tkinter.messagebox
     main()

@@ -20,7 +20,7 @@ def main():
 
     # 安排每天在9:45, 10:45, ..., 21:45执行提醒
     for hour in range(start_hour, end_hour + 1):
-        schedule.every().day.at(f"{hour:02d}:10").do(job)
+        schedule.every().day.at(f"{hour:02d}:45").do(job)
 
     while True:
         # 执行所有到期的任务
